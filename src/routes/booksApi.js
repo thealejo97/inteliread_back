@@ -6,11 +6,37 @@ const router = express.Router();
 
 router.post("/booksApi/getBookInfo", (req, res) => {
   try {
+    console.log(req.body) 
+    const workId = req.body.workId;
+    var url = process.env.URL_OPEN_LIBRARY_SEARCH_BY_BOOK_KEY+workId+".json";
+    axios.get(url, {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then((response) => {
+      console.log(response.data);
+      res.status(200).json(response.data);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send("error in the request to openlibrary api");
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("error in the request to openlibrary api");
+  }
+});
+
+router.post("/booksApi/searchBookTitle", (req, res) => {
+  try {
     console.log(req.body)
-    const keyBook = req.body.key;
-    axios.get("https://openlibrary.org/api/books", {
+    console.log(process.env.URL_OPEN_LIBRARY_SEARCH_BY_TITLE)
+    const title = req.body.title;
+
+    axios.get(process.env.URL_OPEN_LIBRARY_SEARCH_BY_TITLE, {
       params: {
-        bibkeys: keyBook,
+        title: title,
         jscmd: "data",
         format: "json"
       },
@@ -19,6 +45,37 @@ router.post("/booksApi/getBookInfo", (req, res) => {
       }
     })
     .then((response) => {
+      console.log(response.data);
+      res.status(200).json(response.data);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send("error in the request to openlibrary api");
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("error in the request to openlibrary api");
+  }
+});
+
+router.post("/booksApi/searchBookAuthor", (req, res) => {
+  try {
+    console.log(req.body)
+    console.log(process.env.URL_OPEN_LIBRARY_SEARCH_BY_AUTHOR)
+    const author = req.body.author;
+
+    axios.get(process.env.URL_OPEN_LIBRARY_SEARCH_BY_AUTHOR, {
+      params: {
+        author: author,
+        jscmd: "data",
+        format: "json"
+      },
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then((response) => {
+      console.log(response.config.url); // Aquí se imprime la URL utilizada
       console.log(response.data);
       res.status(200).json(response.data);
     })
