@@ -19,7 +19,7 @@ app.get('/', (req,res) =>{
 // mongodb connection
 mongoose
  .connect(process.env.MONGODB_URI)
- .then(()=> console.log("Connected to db eee"))
+ .then(()=> console.log("Connected to db"))
  .catch((error) => console.error(error))
 
 app.listen(port, () => console.log("server listening on port," , port))
