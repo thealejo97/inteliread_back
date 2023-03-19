@@ -2,5 +2,35 @@
 POST http://localhost:9000/api/users HTTP/1.1
 Content-Type: application/json
 
-{}
+{
+    "first_name": "Jhon",
+    "last_name": "Doe",
+    "username": "jdoe@gmail.com"
+}
+###
+GET http://localhost:9000/api/users HTTP/1.1
+Content-Type: application/json
+
+{
+    "first_name": "Alejandro",
+    "last_name": "Montano",
+    "username": "thealejo97@gmail.com"
+}
+###
+GET http://localhost:9000/api/users/6416657c51918c6283fd0561 HTTP/1.1
+Content-Type: application/json
+
+###
+PUT http://localhost:9000/api/users/6416657c51918c6283fd0561 HTTP/1.1
+Content-Type: application/json
+
+{
+    "first_name": "AlejAndrito",
+    "last_name": "Montanito",
+    "username": "thealejo97@gmail.com"
+}
+###
+DELETE http://localhost:9000/api/users/641665a751918c6283fd0564 HTTP/1.1
+Content-Type: application/json
+
 ###
