@@ -4,10 +4,20 @@ POST http://localhost:9000/api/users HTTP/1.1
 Content-Type: application/json
 
 {
-    "first_name": "Alejandro",
-    "last_name": "Montano",
-    "username": "thealejo97@gmail.com",
+    "first_name": "Jhon",
+    "last_name": "Doe",
+    "username": "jdoe@gmail.com",
+    "password": "12345678",
     "userType": "64172a3949a38f0002b88e37"
+}
+###
+
+POST http://localhost:9000/api/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "username":"jdoe@gmail.com",
+    "password":"12345678"
 }
 ###
 
@@ -52,7 +62,7 @@ POST http://localhost:9000/api/readingSession HTTP/1.1
 Content-Type: application/json
 
 {
-    "book":"OL274518W",
+    "book":"OL274509W",
     "total_pages":"348",
     //"start_page":"200",
     "end_page":"358",
@@ -107,5 +117,5 @@ POST http://localhost:9000/api/booksApi/searchBookTitle HTTP/1.1
 Content-Type: application/json
 
 {
-    "title":"Cien"
+    "title":"El coronel no tiene"
 }
