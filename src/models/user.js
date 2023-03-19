@@ -27,11 +27,6 @@ const userSchema = mongoose.Schema({
     ref: "UserType",
     required: true,
   },
-  readingSession: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "UserType",
-    required: true,
-  },
   book_list: [
     {
       type: String,

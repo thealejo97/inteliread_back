@@ -1,12 +1,22 @@
 const mongoose = require('mongoose');
+const user = require("./user");
 
 const readingSessionSchema = mongoose.Schema({
  
   book: {
-    type: Number,
+    type: String,
     ref: 'Book',
     required: true,
     },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user",
+    required: true,
+  },
+  total_pages: {
+    type: Number,
+    required: true,
+  },
   start_page: {
     type: Number,
     required: true,

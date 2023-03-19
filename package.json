@@ -1,7 +1,6 @@
 {
   "name": "inteliread_backend",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "nodemon src/index.js"
@@ -10,11 +9,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.3.4",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "mongoose": "^7.0.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.21"
-  }
+  },
+  "description": ""
 }
