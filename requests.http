@@ -112,6 +112,13 @@ Content-Type: application/json
     "author":"Gabriel garcia"
 }
 }
+###search ALL bookS
+POST http://localhost:9000/api/booksApi/getAllBooks HTTP/1.1
+Content-Type: application/json
+
+{
+    "author":"Gabriel garcia"
+}
 ###search by book title
 POST http://localhost:9000/api/booksApi/searchBookTitle HTTP/1.1
 Content-Type: application/json

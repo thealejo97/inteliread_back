@@ -89,4 +89,34 @@ router.post("/booksApi/searchBookAuthor", (req, res) => {
   }
 });
 
+
+
+router.post("/booksApi/getAllBooks", (req, res) => {
+  try {
+    console.log(process.env.URL_OPEN_LIBRARY_GET_ALL_BOOKS);
+
+    axios.get(process.env.URL_OPEN_LIBRARY_GET_ALL_BOOKS, {
+      params: {
+        jscmd: "data",
+        format: "json"
+      },
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then((response) => {
+      console.log(response.data);
+      res.status(200).json(response.data);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send("error in the request to openlibrary api");
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("error in the request to openlibrary api");
+  }
+});
+
+
 module.exports = router;
