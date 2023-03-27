@@ -89,13 +89,65 @@ router.post("/booksApi/searchBookAuthor", (req, res) => {
   }
 });
 
-
-
 router.post("/booksApi/getAllBooks", (req, res) => {
   try {
-    console.log(process.env.URL_OPEN_LIBRARY_GET_ALL_BOOKS);
-
-    axios.get(process.env.URL_OPEN_LIBRARY_GET_ALL_BOOKS, {
+    const random_search = [
+      "sombra",
+      "sueño",
+      "luz",
+      "viento",
+      "trueno",
+      "fuego",
+      "ciudad",
+      "amor",
+      "odio",
+      "venganza",
+      "paz",
+      "guerra",
+      "muerte",
+      "vida",
+      "sangre",
+      "furia",
+      "mar",
+      "tierra",
+      "aire",
+      "nube",
+      "humo",
+      "hielo",
+      "infierno",
+      "paraíso",
+      "calle",
+      "luna",
+      "sol",
+      "corazón",
+      "alma",
+      "carne",
+      "hueso",
+      "mente",
+      "palabra",
+      "pensamiento",
+      "mundo",
+      "universo",
+      "futuro",
+      "pasado",
+      "presente",
+      "sabiduría",
+      "conocimiento",
+      "poder",
+      "misterio",
+      "fantasma",
+      "leyenda",
+      "aventura",
+      "pasión",
+      "tragedia",
+      "comedia",
+      "drama"
+    ];
+    const limit = req.body.limit;
+    const q = random_search[Math.floor(Math.random() * 51)];
+    
+    const url = process.env.URL_OPEN_LIBRARY_GET_ALL_BOOKS.replace('${q}', q).replace('${limit}', limit);
+    axios.get(url, {
       params: {
         jscmd: "data",
         format: "json"
@@ -117,6 +169,8 @@ router.post("/booksApi/getAllBooks", (req, res) => {
     res.status(500).send("error in the request to openlibrary api");
   }
 });
+
+
 
 
 module.exports = router;
