@@ -85,6 +85,12 @@ Content-Type: application/json
 GET http://localhost:9000/api/readingSession/641730ac2e6e877024008af5 HTTP/1.1
 Content-Type: application/json
 ###Actualizar
+
+
+###Traer sesion por usuario
+GET http://localhost:9000/api/readingSession/getReadingSessionByUser/641757af3b77cd2bc7e397b9 HTTP/1.1
+Content-Type: application/json
+###Actualizar
 PUT http://localhost:9000/api/readingSession/641730ac2e6e877024008af5 HTTP/1.1
 Content-Type: application/json
 

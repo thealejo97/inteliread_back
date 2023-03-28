@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post("/booksApi/getBookInfo", (req, res) => {
   try {
-    console.log(req.body) 
+    //console.log(req.body) 
     const workId = req.body.workId;
     var url = process.env.URL_OPEN_LIBRARY_SEARCH_BY_BOOK_KEY+workId+".json";
     axios.get(url, {
@@ -15,23 +15,23 @@ router.post("/booksApi/getBookInfo", (req, res) => {
       }
     })
     .then((response) => {
-      console.log(response.data);
+      //console.log(response.data);
       res.status(200).json(response.data);
     })
     .catch((error) => {
-      console.error(error);
+      //console.error(error);
       res.status(500).send("error in the request to openlibrary api");
     });
   } catch (error) {
-    console.error(error);
+    //console.error(error);
     res.status(500).send("error in the request to openlibrary api");
   }
 });
 
 router.post("/booksApi/searchBookTitle", (req, res) => {
   try {
-    console.log(req.body)
-    console.log(process.env.URL_OPEN_LIBRARY_SEARCH_BY_TITLE)
+    //console.log(req.body)
+    //console.log(process.env.URL_OPEN_LIBRARY_SEARCH_BY_TITLE)
     const title = req.body.title;
 
     axios.get(process.env.URL_OPEN_LIBRARY_SEARCH_BY_TITLE, {
@@ -45,23 +45,23 @@ router.post("/booksApi/searchBookTitle", (req, res) => {
       }
     })
     .then((response) => {
-      console.log(response.data);
+      //console.log(response.data);
       res.status(200).json(response.data);
     })
     .catch((error) => {
-      console.error(error);
+      //console.error(error);
       res.status(500).send("error in the request to openlibrary api");
     });
   } catch (error) {
-    console.error(error);
+    //console.error(error);
     res.status(500).send("error in the request to openlibrary api");
   }
 });
 
 router.post("/booksApi/searchBookAuthor", (req, res) => {
   try {
-    console.log(req.body)
-    console.log(process.env.URL_OPEN_LIBRARY_SEARCH_BY_AUTHOR)
+    //console.log(req.body)
+    //console.log(process.env.URL_OPEN_LIBRARY_SEARCH_BY_AUTHOR)
     const author = req.body.author;
 
     axios.get(process.env.URL_OPEN_LIBRARY_SEARCH_BY_AUTHOR, {
@@ -75,16 +75,16 @@ router.post("/booksApi/searchBookAuthor", (req, res) => {
       }
     })
     .then((response) => {
-      console.log(response.config.url); // Aquí se imprime la URL utilizada
-      console.log(response.data);
+      //console.log(response.config.url); // Aquí se imprime la URL utilizada
+      //console.log(response.data);
       res.status(200).json(response.data);
     })
     .catch((error) => {
-      console.error(error);
+      //console.error(error);
       res.status(500).send("error in the request to openlibrary api");
     });
   } catch (error) {
-    console.error(error);
+    //console.error(error);
     res.status(500).send("error in the request to openlibrary api");
   }
 });
@@ -157,15 +157,15 @@ router.post("/booksApi/getAllBooks", (req, res) => {
       }
     })
     .then((response) => {
-      console.log(response.data);
+      //console.log(response.data);
       res.status(200).json(response.data);
     })
     .catch((error) => {
-      console.error(error);
+      //console.error(error);
       res.status(500).send("error in the request to openlibrary api");
     });
   } catch (error) {
-    console.error(error);
+    //console.error(error);
     res.status(500).send("error in the request to openlibrary api");
   }
 });
