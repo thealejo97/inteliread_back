@@ -7,14 +7,13 @@ const router = express.Router();
 router.post("/readingSession", (req, res) => {
  
   readingSessionSchema
-  .find({user: req.body.user})
+  .find({user: req.body.user,book: req.body.book,})
   .sort({ created_at: -1 })
   .limit(1)
   .then((data) => {
     var previousPage = 0;
     var previousprogress = 0;
     
-    //console.log(data);
 
     if (data.length > 0){
         previousPage = data[0].end_page;
@@ -75,37 +74,53 @@ router.delete("/readingSession/:id", (req, res) => {
 router.get("/readingSession/getReadingSessionByUser/:id", async (req, res) => {
   try {
     const axios = require("axios");
-    const data = await readingSessionSchema
-      .find({user: req.params.id})
-      .sort({ created_at: -1 });
+    const data = await readingSessionSchema.aggregate([
+      {
+        $sort: { created_at: -1 }
+      },
+      {
+        $group: {
+          _id: {
+            user: "$user",
+            book: "$book"
+          },
+          last_session: { $first: "$$ROOT" }
+        }
+      },
+      {
+        $replaceRoot: {
+          newRoot: "$last_session"
+        }
+      }
+    ]);
+    console.log(data)
 
-    const book_info = [];
 
-    for (var i = 0; i < data.length ; i++){
+   const dataWithBookInfo = [];
+    for (let i = 0; i < data.length; i++) {
       try {
         const workId = data[i].book;
-        const url = process.env.URL_OPEN_LIBRARY_SEARCH_BY_BOOK_KEY+workId+".json";
+        const url = process.env.URL_OPEN_LIBRARY_SEARCH_BY_BOOK_KEY + workId + ".json";
         const response = await axios.get(url, {
           headers: {
             "Content-Type": "application/json"
           }
         });
-        book_info.push(response.data); // Agregamos la info del libro al arreglo
+        dataWithBookInfo.push({
+          ...data[i],
+          book_info: response.data // Agregamos la info del libro correspondiente
+        });
       } catch (error) {
         console.error(error);
       }
     }
-    
-    const dataWithBookInfo = data.map((session, index) => {
-      return {
-        ...session._doc, // Copiamos todas las propiedades de la sesión de lectura
-        book_info: book_info[index] // Agregamos la info del libro correspondiente
-      };
-    });
 
     res.json({data: dataWithBookInfo}); // Enviamos todo en la respuesta JSON
+    
 
   } catch (err) {
+    console.log("********************")
+    console.log(err)
     res.json({ message: err });
   }
 });
